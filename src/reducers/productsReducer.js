@@ -1,9 +1,13 @@
 
 const productsReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'GET_PRODUCTS': {
-            console.log(action.payload);
+        case 'GET_PRODUCTS':
+            console.log('Start fetching products');
             return state;
+        case 'POPULATE_PRODUCTS':
+            console.log('Products are here!');
+            return action.payload;
+
         // // Can return just the new todos array - no extra object around it
         // return [
         //   ...state,
@@ -13,7 +17,6 @@ const productsReducer = (state = {}, action) => {
         //     completed: false
         //   }
         // ]
-        }
         default:
             return state;
     }
