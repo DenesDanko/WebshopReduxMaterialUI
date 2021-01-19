@@ -5,18 +5,26 @@ import App from './components/App';
 
 import store from './store';
 
-const fetchTodos = async (dispatch, getState) => {
+const fetchProducts = (dispatch, getState) => {
+    console.log(getState());
     dispatch({ type: 'GET_PRODUCTS' });
-    try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const products = await response.json();
-        dispatch({ type: 'POPULATE_PRODUCTS', payload: products });
-    } catch {
-        //dispath
-    }
+    console.log(getState());
+    dispatch({ type: 'FETCH_FAILED', payload: 'Bye bye Nyuszipuszi!' });
+    console.log(getState());
+    // fetch('https://fakestoreapi.com/product')
+    //     .then(response => response.json())
+    //     .then(products => dispatch({ type: 'POPULATE_PRODUCTS', payload: products }))
+    //     .catch(error => dispatch({ type: 'FETCH_FAILED', payload: error.message }));
+    // try {
+    //     const response = await fetch('https://fakestoreapi.com/products');
+    //     const products = await response.json();
+    //     dispatch({ type: 'POPULATE_PRODUCTS', payload: products });
+    // } catch {
+    //     dispatch({ type: 'FETCH_FAILED', payload: error.message })
+    // }
 };
 
-store.dispatch(fetchTodos);
+store.dispatch(fetchProducts);
 
 ReactDOM.render(
   <React.StrictMode>
