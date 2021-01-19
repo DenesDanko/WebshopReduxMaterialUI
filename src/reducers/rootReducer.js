@@ -6,7 +6,6 @@ import statusReducer from './statusReducer';
 const webshop = {
     products:{},
     status:{
-        alma: 3,
         loading: false,
         error: ''
     }
