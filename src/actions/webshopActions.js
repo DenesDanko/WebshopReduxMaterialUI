@@ -4,6 +4,7 @@ export const getProducts  = async (dispatch, getState) => {
         const products = await response.json();
         dispatch({ type: 'POPULATE_PRODUCTS', payload: products });
     } catch (error) {
-        dispatch({ type: 'FETCH_FAILED', payload: error.message });
+        console.log(error.message);
+        dispatch({ type: 'FETCH_FAILED' });
     }
 };
