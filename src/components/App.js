@@ -6,6 +6,7 @@ import { getProducts } from '../actions/webshopActions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Category from './Category';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     '& > * + *': {
       marginLeft: theme.spacing(2),
     },
-  },
+  }
 }));
 
 function App() {
@@ -31,7 +32,10 @@ function App() {
         <div className={classes.root}>
             { status.loading
                 ? <CircularProgress />
-                : <h1>{ status.message }</h1>
+                : <>
+                    <h1>{ status.message }</h1>
+                    <Category url='../shopping_bag_favicon.png' name='Valami'/>
+                </>
             }
         </div>
     )
