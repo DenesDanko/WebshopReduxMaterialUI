@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 import { useSelector, useDispatch  } from 'react-redux';
-import { getProducts } from '../actions/webshopActions';
+import { getProducts } from '../actions/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -27,15 +27,19 @@ function App() {
     }, [dispatch]);
 
     const status = useSelector( state => state.status );
+    const products = useSelector( state => state.products );
 
     return (
         <div className={classes.root}>
             { status.loading
                 ? <CircularProgress />
-                : <>
-                    <h1>{ status.message }</h1>
-                    <Category url='../shopping_bag_favicon.png' name='Valami'/>
-                </>
+                :   <>
+                        <h1>{ status.message }</h1>
+                        <Category
+                            url = { products['electronics'][0].image }
+                            name = { products['electronics'][0].category }
+                        />
+                    </>
             }
         </div>
     )

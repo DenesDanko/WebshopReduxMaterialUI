@@ -28,7 +28,7 @@ const Category = ({ url, name }) => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                    {name}
+                    {name.toUpperCase()}
                     </Typography>
                 </CardContent>
             </CardActionArea>
