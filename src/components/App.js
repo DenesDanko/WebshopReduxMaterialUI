@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 import { getProducts } from '../actions/webshopActions';
-import store from '../store';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -20,10 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        store.dispatch(getProducts);
-    }, []);
+        dispatch(getProducts);
+    }, [dispatch]);
 
     const status = useSelector( state => state.status );
 
