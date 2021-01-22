@@ -7,14 +7,16 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-      maxWidth: 345,
+        width: 256,
+        marginLeft: theme.spacing(4),
+        marginTop: theme.spacing(4)
     },
     media: {
-      height: 140,
-    },
-  });
+        height: 140,
+    }
+}));
 
 const Category = ({ url, name }) => {
     const classes = useStyles();

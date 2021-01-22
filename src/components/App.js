@@ -9,13 +9,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Category from './Category';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    justifyContent: "center",
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
-  }
+    root: {
+        display: 'flex',
+        justifyContent: "center"
+    }
 }));
 
 function App() {
@@ -29,17 +26,20 @@ function App() {
     const status = useSelector( state => state.status );
     const products = useSelector( state => state.products );
 
+    const categoryFactory = (products) => {
+        return Object.keys(products).map( category => {
+            return <Category
+                url = { products[category][0].image }
+                name = { category }
+            />
+        })
+    };
+
     return (
         <div className={classes.root}>
             { status.loading
                 ? <CircularProgress />
-                :   <>
-                        <h1>{ status.message }</h1>
-                        <Category
-                            url = { products['electronics'][0].image }
-                            name = { products['electronics'][0].category }
-                        />
-                    </>
+                : <>{ categoryFactory(products) } </>
             }
         </div>
     )
