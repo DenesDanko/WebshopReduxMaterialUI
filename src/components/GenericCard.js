@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Category = ({ url, name }) => {
+const GenericCard = ({ url, name }) => {
     const classes = useStyles();
 
     return (
@@ -38,4 +38,4 @@ const Category = ({ url, name }) => {
     )
 }
 
-export default Category;
+export default GenericCard;

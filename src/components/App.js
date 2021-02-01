@@ -6,7 +6,7 @@ import { getProducts } from '../actions/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Category from './Category';
+import GenericCard from './GenericCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,7 +28,7 @@ function App() {
 
     const categoryFactory = (products) => {
         return Object.keys(products).map( category => {
-            return <Category
+            return <GenericCard
                 url = { products[category][0].image }
                 name = { category }
             />
