@@ -70,7 +70,7 @@ function App() {
         <div className={classes.root}>
             { status.loading
                 ? <CircularProgress />
-                : <>{ cardFactory() } </>
+                : cardFactory()
             }
         </div>
     )
