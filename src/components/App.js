@@ -8,6 +8,7 @@ import { setCategory } from '../actions/AppActions';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GenericCard from './GenericCard';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,7 +59,10 @@ function App() {
 
     const cardFactory = () => {
         return items
-            ? itemFactory(items)
+            ?   <>
+                    <Button variant="contained" onClick={ handleClick } color="primary">BACK</Button>
+                    { itemFactory(items) }
+                </>
             : categoryFactory(products)
     }
 
