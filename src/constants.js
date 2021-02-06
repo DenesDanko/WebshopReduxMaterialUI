@@ -1,0 +1,3 @@
+export const SET_CATEGORY = 'SET_CATEGORY';
+export const POPULATE_PRODUCTS = 'POPULATE_PRODUCTS';
+export const FETCH_FAILED = 'FETCH_FAILED';
