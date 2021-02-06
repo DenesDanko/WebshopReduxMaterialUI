@@ -23,14 +23,20 @@ function App() {
         dispatch(getProducts);
     }, [dispatch]);
 
+    const handleClick = (categoryName) => {
+        console.log(categoryName);
+    }
+
     const status = useSelector( state => state.status );
     const products = useSelector( state => state.products );
 
     const categoryFactory = (products) => {
         return Object.keys(products).map( category => {
             return <GenericCard
+                key = { category }
                 url = { products[category][0].image }
                 name = { category }
+                onClick = { handleClick }
             />
         })
     };
