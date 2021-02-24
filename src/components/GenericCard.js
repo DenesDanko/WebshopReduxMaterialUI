@@ -9,28 +9,35 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: 256,
-        marginLeft: theme.spacing(4),
-        marginTop: theme.spacing(4)
+        width: '280px',
+        height: '100%',
+        margin: theme.spacing(1)
     },
     media: {
-        height: 140,
+        margin: 'auto',
+        width: '250px',
+        height: '210px'
+    },
+    h5: {
+        fontSize: '18px',
+        height: '98px',
+        textTransform: 'capitalize'
     }
 }));
 
-const GenericCard = ({ url, name, category, onClick }) => {
+const GenericCard = ({ id=null, url, name, category, onClick }) => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root} onClick={ () => onClick(category)}>
+        <Card className={classes.root} onClick={ () => onClick(category, id)}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
                     image={url}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    {name.toUpperCase()}
+                    <Typography gutterBottom variant="h5" component="h2" className={classes.h5}>
+                        {name}
                     </Typography>
                 </CardContent>
             </CardActionArea>

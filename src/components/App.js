@@ -3,77 +3,43 @@ import { useEffect } from 'react';
 
 import { useSelector, useDispatch  } from 'react-redux';
 import { getProducts } from '../actions/actions';
-import { setCategory } from '../actions/AppActions';
 
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import GenericCard from './GenericCard';
-import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: "center"
-    }
-}));
+import { MainPage } from './MainPage';
+import { CategoryPage } from './CategoryPage';
+import { ItemPage } from './ItemPage';
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         display: 'flex',
+//         justifyContent: "center"
+//     }
+// }));
 
 function App() {
-    const classes = useStyles();
+    // const classes = useStyles();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getProducts);
     }, [dispatch]);
 
-    const handleClick = (categoryName) => {
-        dispatch(setCategory(categoryName));
-    }
+    const activePage = useSelector( state => state.activePage );
 
-    const status = useSelector( state => state.status );
-    const products = useSelector( state => state.products );
-    const items = useSelector( state => state.products[state.category])
-
-    const categoryFactory = (products) => {
-        return Object.keys(products).map( category => {
-            return <GenericCard
-                key = { category }
-                url = { products[category][0].image }
-                name = { category }
-                category = { category }
-                onClick = { handleClick }
-            />
-        })
+    const pageSelector = () => {
+        switch (activePage) {
+            case 'loading': return <CircularProgress />;
+            case 'mainPage': return <MainPage />;
+            case 'categoryPage': return <CategoryPage />;
+            case 'itemPage': return <ItemPage />;
+            default: return <h1>Error</h1>;
+        }
     };
 
-    const itemFactory = (items) => {
-        return items.map( item => {
-            return <GenericCard
-                key = { item.id }
-                url = { item.image }
-                name = { item.title }
-                category = { item.category }
-                onClick = { handleClick }
-            />
-        })
-    }
+    return pageSelector();
 
-    const cardFactory = () => {
-        return items
-            ?   <>
-                    <Button variant="contained" onClick={ handleClick } color="primary">BACK</Button>
-                    { itemFactory(items) }
-                </>
-            : categoryFactory(products)
-    }
-
-    return (
-        <div className={classes.root}>
-            { status.loading
-                ? <CircularProgress />
-                : cardFactory()
-            }
-        </div>
-    )
 }
 
 export default App;
