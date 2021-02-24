@@ -9,7 +9,7 @@ import selectedProductReducer from './selectedProductReducer';
 const initWebshop = {
     products: {},
     productsByID: {},
-    activePage: 'loading',
+    activePage: 'loadingPage',
     category: null,
     selectedProductID: null
 };

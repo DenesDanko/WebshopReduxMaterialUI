@@ -4,22 +4,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { getProducts } from '../actions/actions';
 
-// import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import { LoadingPage } from './LoadingPage';
 import { MainPage } from './MainPage';
 import { CategoryPage } from './CategoryPage';
-import { ItemPage } from './ItemPage';
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         display: 'flex',
-//         justifyContent: "center"
-//     }
-// }));
+import { ProductPage } from './ProductPage';
 
 function App() {
-    // const classes = useStyles();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,16 +20,15 @@ function App() {
 
     const pageSelector = () => {
         switch (activePage) {
-            case 'loading': return <CircularProgress />;
+            case 'loadingPage': return <LoadingPage />;
             case 'mainPage': return <MainPage />;
             case 'categoryPage': return <CategoryPage />;
-            case 'itemPage': return <ItemPage />;
+            case 'productPage': return <ProductPage />;
             default: return <h1>Error</h1>;
         }
     };
 
     return pageSelector();
-
 }
 
 export default App;

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import { setActivePage } from '../actions/AppActions';
 import Product from './Product';
 
-export const ItemPage = () => {
+export const ProductPage = () => {
     const dispatch = useDispatch();
     const selectedProduct = useSelector( state => state.productsByID[state.selectedProductID] );
 
