@@ -9,6 +9,7 @@ import { LoadingPage } from './LoadingPage';
 import { MainPage } from './MainPage';
 import { CategoryPage } from './CategoryPage';
 import { ProductPage } from './ProductPage';
+import { SearchOverlay } from './SearchOverlay';
 
 function App() {
     const dispatch = useDispatch();
@@ -30,8 +31,9 @@ function App() {
     };
 
     return  (<>
-                <AppHeader/>
-                {pageSelector()}
+                <AppHeader />
+                <SearchOverlay />
+                { pageSelector() }
             </>);
 }
 
