@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import GenericCard from './GenericCard';
 import { setActivePage, setSelectedProductID } from '../actions/AppActions';
 
@@ -33,11 +32,6 @@ export const CategoryPage = () => {
     };
 
     return  (<>
-                <Button
-                    variant='contained'
-                    color="primary"
-                    onClick={ () => dispatch(setActivePage('mainPage')) }
-                >BACK</Button>
                 <h1 className={classes.h1}>{ categoryHeading }</h1>
                 <div className={classes.root}>
                     { categoryItems.map( (item) => {

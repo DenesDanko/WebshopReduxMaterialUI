@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { getProducts } from '../actions/actions';
 
+import { AppHeader } from './AppHeader'
 import { LoadingPage } from './LoadingPage';
 import { MainPage } from './MainPage';
 import { CategoryPage } from './CategoryPage';
@@ -28,7 +29,10 @@ function App() {
         }
     };
 
-    return pageSelector();
+    return  (<>
+                <AppHeader/>
+                {pageSelector()}
+            </>);
 }
 
 export default App;
