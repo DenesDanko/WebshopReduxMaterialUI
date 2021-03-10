@@ -50,7 +50,9 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
-        margin: theme.spacing(3)
+        margin: theme.spacing(3),
+        // margin: 0,
+        paddingTop: '64px'
     },
     media: {
         width: '250px',

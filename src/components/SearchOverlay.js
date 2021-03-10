@@ -8,13 +8,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     overlay: {
-        position: 'absolute',
+        position: 'fixed',
         width: '100%',
-        height: 'calc(100vh - 64px)',
+        height: '100%',
         textAlign: 'right',
         backgroundColor: '#dadada',
         zIndex: 1500,
         color: '#fff',
+        marginTop: '64px'
     },
     hideOverlay: {
         display: 'none'

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         display: "none",
         [theme.breakpoints.up("sm")]: {
             display: "block",
-        },
+        }
     },
     search: {
         position: "relative",
@@ -69,7 +69,7 @@ export const AppHeader = () => {
 
     return (
         <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
                 <IconButton
                     edge="start"
