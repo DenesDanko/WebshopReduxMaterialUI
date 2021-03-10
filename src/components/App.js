@@ -10,9 +10,15 @@ import { MainPage } from './MainPage';
 import { CategoryPage } from './CategoryPage';
 import { ProductPage } from './ProductPage';
 import { SearchOverlay } from './SearchOverlay';
+import CartDrawer from './CartDrawer';
 
 function App() {
     const dispatch = useDispatch();
+    const [cartOpen, setCartOpen] = React.useState(false);
+
+    const handleCartClick = () =>{
+        setCartOpen(cartOpen => !cartOpen);
+    }
 
     useEffect(() => {
         dispatch(getProducts);
@@ -31,7 +37,8 @@ function App() {
     };
 
     return  (<>
-                <AppHeader />
+                <AppHeader toggleCart={ handleCartClick }/>
+                <CartDrawer open={ cartOpen }/>
                 <SearchOverlay />
                 { pageSelector() }
             </>);
