@@ -4,6 +4,7 @@ import productsByIDReducer from './productsByIDReducer';
 import activePageReducer from './activePageReducer';
 import selectedProductReducer from './selectedProductReducer';
 import searchTermReducer from './searchTermReducer';
+import cartReducer from './cartReducer';
 
 //TODO: use combineReducers
 
@@ -13,7 +14,8 @@ const initWebshop = {
     activePage: 'loadingPage',
     category: null,
     selectedProductID: null,
-    searchTerm: ''
+    searchTerm: '',
+    cart: {}
 };
 
 const rootReducer = (state = initWebshop, action) => {
@@ -23,7 +25,8 @@ const rootReducer = (state = initWebshop, action) => {
         activePage: activePageReducer(state.activePage, action),
         category: AppReducer(state.category, action),
         selectedProductID: selectedProductReducer(state.selectedProductID, action),
-        searchTerm: searchTermReducer(state.searchTerm, action)
+        searchTerm: searchTermReducer(state.searchTerm, action),
+        cart: cartReducer(state.cart, action)
     };
 }
 

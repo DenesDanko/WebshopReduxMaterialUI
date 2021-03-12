@@ -6,6 +6,7 @@ export const ProductPage = () => {
     const selectedProduct = useSelector( state => state.productsByID[state.selectedProductID] );
 
     return  <Product
+                id={ selectedProduct.id }
                 image={ selectedProduct.image }
                 title={ selectedProduct.title }
                 description={ selectedProduct.description }
