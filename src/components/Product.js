@@ -9,6 +9,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
+import { green, grey } from '@material-ui/core/colors';
 
 import { useDispatch  } from 'react-redux';
 import { addToCart } from '../actions/AppActions';
@@ -140,7 +141,7 @@ const Product = ({ id, image, title, description, price, category }) => {
                     </div>
                     <Button
                         variant='contained'
-                        color='secondary'
+                        style={{ backgroundColor: green[500], color: grey[50] }}
                         className={classes.marginTop}
                         onClick={() => dispatch(addToCart({id, qty, size}))}>
                         Add to cart

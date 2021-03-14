@@ -3,18 +3,16 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 import { useSelector, useDispatch  } from 'react-redux';
+import { removeFromCart } from '../actions/AppActions';
 
 
 const drawerWidth = 320;
@@ -41,11 +39,14 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(7),
         marginRight: theme.spacing(2)
     },
+    icon: {
+        fontSize: 32
+    }
 }));
 
 const CartDrawer = ({open}) => {
     const classes = useStyles();
-    const theme = useTheme();
+    const dispatch = useDispatch();
 
     const cartArray = useSelector( state => Object.entries(state.cart));
     const productsByID = useSelector( state => state.productsByID);
@@ -65,15 +66,27 @@ const CartDrawer = ({open}) => {
                 <List className={classes.root}>
                     { cartArray.map(([key, value]) => {
                         const id = (key.substr(0, key.indexOf('_')));
-                        console.log(key.substr(key.indexOf('_')+1)); // Size
-                        console.log(value); // qty
-                        console.log(productsByID[id].image);
+                        const product = productsByID[id];
+
+                        const size = key.substr(key.indexOf('_')+1);
+                        const details = size === 'undefined'
+                                            ? `Quantity: ${value}`
+                                            : `Quantity: ${value}\u00A0\u00A0\u00A0\u00A0Size: ${size}`;
                         return (
-                            <ListItem key={ id }>
+                            <ListItem key={ key }>
                                 <ListItemAvatar>
-                                    <Avatar alt="Product" src={ productsByID[id].image } className={classes.large}/>
+                                    <Avatar alt="Product" src={ product.image } className={classes.large}/>
                                 </ListItemAvatar>
-                                <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+                                <ListItemText primary={ product.title } secondary={ details } />
+                                <IconButton
+                                    edge="start"
+                                    style={ {padding: 0} }
+                                    color="secondary"
+                                    aria-label="Remove from cart"
+                                    onClick={ () => dispatch(removeFromCart(key)) }
+                                >
+                                    <DeleteForeverIcon className={classes.icon}/>
+                                </IconButton>
                             </ListItem>)
                         })
                     }
