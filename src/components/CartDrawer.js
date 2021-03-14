@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
@@ -12,7 +12,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
 import { useSelector, useDispatch  } from 'react-redux';
-import { removeFromCart } from '../actions/AppActions';
+import { setActivePage, setSelectedProductID, removeFromCart } from '../actions/AppActions';
 
 
 const drawerWidth = 320;
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-      },
+    },
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
@@ -51,6 +51,22 @@ const CartDrawer = ({open}) => {
     const cartArray = useSelector( state => Object.entries(state.cart));
     const productsByID = useSelector( state => state.productsByID);
 
+    const handleOnClick = (event) => {
+        let element = event.target;
+        let remove = false;
+        while (element.nodeName !== 'LI') {
+            if (element.nodeName === 'BUTTON') remove = true;
+            element = element.parentNode;
+        }
+        const cartItemID = element.id;
+        if (remove) {
+            dispatch(removeFromCart(cartItemID));
+        } else {
+            dispatch(setSelectedProductID(cartItemID.substr(0, cartItemID.indexOf('_'))));
+            dispatch(setActivePage('productPage'));
+        }
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -63,9 +79,9 @@ const CartDrawer = ({open}) => {
                 paper: classes.drawerPaper,
                 }}
             >
-                <List className={classes.root}>
+                <List className={classes.root} onClick={ handleOnClick } >
                     { cartArray.map(([key, value]) => {
-                        const id = (key.substr(0, key.indexOf('_')));
+                        const id = key.substr(0, key.indexOf('_'));
                         const product = productsByID[id];
 
                         const size = key.substr(key.indexOf('_')+1);
@@ -73,7 +89,7 @@ const CartDrawer = ({open}) => {
                                             ? `Quantity: ${value}`
                                             : `Quantity: ${value}\u00A0\u00A0\u00A0\u00A0Size: ${size}`;
                         return (
-                            <ListItem key={ key }>
+                            <ListItem key={ key } id={ key }>
                                 <ListItemAvatar>
                                     <Avatar alt="Product" src={ product.image } className={classes.large}/>
                                 </ListItemAvatar>
@@ -83,7 +99,6 @@ const CartDrawer = ({open}) => {
                                     style={ {padding: 0} }
                                     color="secondary"
                                     aria-label="Remove from cart"
-                                    onClick={ () => dispatch(removeFromCart(key)) }
                                 >
                                     <DeleteForeverIcon className={classes.icon}/>
                                 </IconButton>
